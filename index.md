@@ -90,26 +90,6 @@ Read correct lesson meta from esciencecenter-digital-skills/workshop-metadata
 Check DC curriculum
 {% endcomment %}
 
-{% comment %}
-EVENTBRITE
-
-This block includes the Eventbrite registration widget if
-'eventbrite' has been set in the header.  You can delete it if you
-are not using Eventbrite, or leave it in, since it will not be
-displayed if the 'eventbrite' field in the header is not set.
-{% endcomment %}
-{% if eventbrite %}
-<strong>Some adblockers block the registration window. If you do not see the
-  registration box below, please check your adblocker settings.</strong>
-<iframe
-  src="https://www.eventbrite.com/tickets-external?eid={{eventbrite}}&ref=etckt"
-  frameborder="0"
-  width="100%"
-  height="400px"
-  scrolling="auto">
-</iframe>
-{% endif %}
-
 
 <h2 id="general">General Information</h2>
 
@@ -119,16 +99,10 @@ INTRODUCTION
 Edit the general explanatory paragraph below if you want to change
 the pitch.
 {% endcomment %}
-{% if info.carpentry == "swc" %}
-{% include swc/intro.html %}
-{% elsif info.carpentry == "dc" %}
-{% include dc/intro.html %}
-{% elsif info.carpentry == "lc" %}
-{% include lc/intro.html %}
-{% elsif info.carpentry == "ds" %}
-{% include ds/intro.md %}
-{% remote_include {{lesson_meta}}/description.md %}
-{% endif %}
+
+This workshop teaches you the skills to make your code reusable by others.
+You will practice these skills by directly applying them to your own project.
+Inevitably, this will make your research more reproducible.
 
 {% comment %}
 AUDIENCE
@@ -146,7 +120,8 @@ workshop is only open to people from a particular institution.
 <div style="display: flex"><div>
      <strong>Who:&nbsp;</strong>
      </div>
-     <div markdown=1>{% remote_include {{lesson_meta}}/who.md %}</div></div>
+     <div markdown=1>This workshop is aimed at researchers who want to make their code reusable. You are able to write basic code in a programming language like R or Python. This can be a few simple lines of code or a larger piece of software.
+</div></div>
 {% endif %}
 
 {% comment %}
@@ -219,6 +194,8 @@ Modify the block below if there are any special requirements.
     Mac, Linux, or Windows operating system (not a tablet, Chromebook, etc.) that they have administrative privileges on.
   {% endif %}
   They should have a few specific software packages installed (listed <a href="#setup">below</a>).
+
+  They should bring their own coding project to the workshop. This can range from a few small scripts to an extensive piece of software.
 </p>
 
 {% comment %}
@@ -382,21 +359,31 @@ of code below the Schedule `<h2>` header below with
 
 {% if info.carpentry == "ds" %}
 <h2 id="syllabus">Syllabus</h2>
-{% remote_include {{lesson_meta}}/syllabus.md %}
-{% endif %}
+
+- Why is reproducibility important? 
+- How do I share my code with others using GitHub? 
+- What is the minimal documentation required for others to be able to run my code? 
+  - Writing a good README file 
+  - Dealing with dependencies
+- What makes code readable and reusable?
+- Code conventions and modular coding 
 
 <h2 id="schedule">Schedule</h2>
+* 09:30 Welcome & icebreaker
+* 09:45 Workshop introduction: why is reproducibility important?
+* 10:00 Uploading a coding project to GitHub
+* 10:30 break
+* 10:40 Software dependencies
+* 11:00 Software documentation
+* 11:30 break
+* 11:40 Code conventions and modular coding
+* 12:30 Lunch
+* 13:30 Next steps: how to make your code reusable?
+* 13:45 Work on your own project
+* 15:30 Reusability check
+* 16:15 Wrap-up
+* 16:30 END 
 
-{% if info.carpentry == "swc" %}
-{% include swc/schedule.html %}
-{% elsif info.carpentry == "dc" %}
-{% include dc/schedule.html %}
-{% elsif info.carpentry == "lc" %}
-{% include lc/schedule.html %}
-{% elsif info.carpentry == "ds" %}
-{% remote_include {{lesson_meta}}/schedule.md %}
-{% elsif info.carpentry == "pilot" %}
-The lesson taught in this workshop is being piloted and a precise schedule is yet to be established. The workshop will include regular breaks. If you would like to know the timing of these breaks in advance, please [contact the workshop organisers](#contact). For a list of lesson sections and estimated timings, [visit the lesson homepage]({{ site.lesson_site }}).
 {% comment %}
 Edit/replace the text above if you want to include a schedule table.
 See the contents of the _includes/custom-schedule.html file for an example of
@@ -448,30 +435,35 @@ during the workshop.
 {% endcomment %}
 
 <h3 id="software-setup">Software setup</h3>
+### Software
 
-{% if info.carpentry == "swc" %}
-{% include swc/setup.html %}
-{% elsif info.carpentry == "dc" %}
-{% include dc/setup.html %}
-{% elsif info.carpentry == "lc" %}
-{% include lc/setup.html %}
-{% elsif info.carpentry == "ds" %}
-{% capture content %}
-{% remote_include {{lesson_meta}}/setup.md %}
-{% endcapture %}
-{% if content contains "/setup.md" %}
-  {% capture setup %}
-  {% remote_include https://raw.githubusercontent.com/{{content | strip}} %}
-  {% endcapture %}
-  {{ setup | split: "---" | last}}
-{% else %}
-  {{ content }}
-{% endif %}
-{% elsif info.carpentry == "pilot" %}
-Please check the "Setup" page of
-[the lesson site]({{ site.lesson_site }}) for instructions to follow
-to obtain the software and data you will need to follow the lesson.
-{% endif %}
+To participate in this workshop, you will need to prepare the following (if you haven't already):
+- Install Shell and Git. Please refer to [this page](https://coderefinery.github.io/installation/git-in-terminal/#installation) for installation instructions.
+- Create a GitHub account. Please refer to [this page](https://coderefinery.github.io/installation/github/) for instructions.
+- Set up an SSH connection to GitHub. Please refer to [this page](https://coderefinery.github.io/installation/ssh/) for instructions.
+
+### To confirm that everything works
+
+You should now be able to open [a terminal window](https://swcarpentry.github.io/shell-novice/#open-a-new-shell) and execute the following commands:
+
+#### Git
+```
+git --version
+```
+returning (something similar to):
+```
+git version 2.37.1 (Apple Git-137.1)
+```
+
+#### Github account & SSH connection 
+```
+ssh git@github.com
+```
+returning (something similar to):
+```
+Hi [username]! You've successfully authenticated, but GitHub does not provide shell access.
+Connection to github.com closed.
+```
 
 {% comment %}
 For online workshops, the section below provides:
