@@ -245,7 +245,6 @@ Display the contact email address set in the configuration file.
   {% if site.email %}
   {% for email in site.email %}
   {% if forloop.last and site.email.size > 1 %}
-  or
   {% else %}
   {% unless forloop.first %}
   ,
