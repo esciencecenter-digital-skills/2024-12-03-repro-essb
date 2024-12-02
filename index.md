@@ -399,8 +399,9 @@ of code below the Schedule `<h2>` header below with
 * 09:45 Workshop introduction: why is reproducibility important?
 * 10:00 Uploading a coding project to GitHub
 * 10:30 break
-* 10:40 Software dependencies
-* 11:00 Software documentation
+* 10:40 Uploading a coding project to GitHub
+* 10:55 Software dependencies
+* 11:15 Software documentation
 * 11:30 break
 * 11:40 Code conventions and modular coding
 * 12:30 Lunch
@@ -408,7 +409,7 @@ of code below the Schedule `<h2>` header below with
 * 13:45 Work on your own project
 * 15:30 Reusability check
 * 16:15 Wrap-up
-* 16:30 END 
+* 16:30 DRINKS
 
 {% comment %}
 Edit/replace the text above if you want to include a schedule table.
